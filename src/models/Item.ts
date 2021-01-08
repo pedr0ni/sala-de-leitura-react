@@ -5,3 +5,7 @@ export default interface Item {
     score?: number,
     pages?: number
 }
+
+export function toLocale() {
+
+}

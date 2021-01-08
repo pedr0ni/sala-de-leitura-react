@@ -27,7 +27,7 @@ export default function Library() {
         setEditItem(undefined)
         setModalOpen(false)
     }
-    
+
     return (
         <div>
             <Modal onClose={() => closeEditing()} onOpen={() => setModalOpen(true)} open={modalOpen}>

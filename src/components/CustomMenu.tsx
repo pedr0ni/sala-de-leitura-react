@@ -11,7 +11,7 @@ export default function CustomMenu() {
             <Container>
                 <Menu.Item onClick={() => history.push("/")} as='a' active={location.pathname === "/"}>Painel de Controle</Menu.Item>
                 <Menu.Item onClick={() => history.push("/library")} as='a' active={location.pathname === "/library"}>Biblioteca</Menu.Item>
-                <Menu.Item as='a'>Escola</Menu.Item>
+                <Menu.Item onClick={() => history.push("/school")} active={location.pathname === "/school"} as='a'>Escola</Menu.Item>
                 <Menu.Menu position='right'>
                     <Dropdown item text='Language'>
                         <Dropdown.Menu>

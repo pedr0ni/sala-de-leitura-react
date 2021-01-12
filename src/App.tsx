@@ -9,7 +9,8 @@ import { Container } from 'semantic-ui-react';
 import CustomMenu from './components/CustomMenu';
 import Dashboard from './views/Dashboard';
 import Library from './views/Library';
-import School from './views/School';
+import Profile from './views/Profile';
+import Students from './views/Students';
 
 function App() {
 	return (
@@ -21,7 +22,9 @@ function App() {
 
 					<Route exact path="/library" component={Library} />
 
-					<Route exact path="/school" component={School} />
+					<Route exact path="/students" component={Students} />
+
+					<Route exact path="/profile" component={Profile} />
 				</Switch>
 			</Container>
 		</Router>

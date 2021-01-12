@@ -1,27 +1,58 @@
 import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { Container, Dropdown, Menu } from 'semantic-ui-react'
+import { Container, Divider, Dropdown, Menu } from 'semantic-ui-react'
+
+import Logo from '../assets/img/logo.png'
+import Router from '../utils/Router'
 
 export default function CustomMenu() {
     const location = useLocation()
     const history = useHistory()
 
     return (
-        <Menu pointing={true} secondary={true} size='large'>
-            <Container>
-                <Menu.Item onClick={() => history.push("/")} as='a' active={location.pathname === "/"}>Painel de Controle</Menu.Item>
-                <Menu.Item onClick={() => history.push("/library")} as='a' active={location.pathname === "/library"}>Biblioteca</Menu.Item>
-                <Menu.Item onClick={() => history.push("/school")} active={location.pathname === "/school"} as='a'>Escola</Menu.Item>
-                <Menu.Menu position='right'>
-                    <Dropdown item text='Language'>
-                        <Dropdown.Menu>
-                            <Dropdown.Item>English</Dropdown.Item>
-                            <Dropdown.Item>Russian</Dropdown.Item>
-                            <Dropdown.Item>Spanish</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Menu.Menu>
-            </Container>
-        </Menu>
+        <div>
+            <Menu className="special-menu" secondary={true}>
+                <Container>
+                    <Menu.Item>
+                        <img alt="Logo" className="image-logo" src={Logo} />
+                    </Menu.Item>
+                    
+                    {
+                        Router.filter(r => !r.dropdown).map((entry, key) => {
+                            return (
+                                <Menu.Item 
+                                key={key} 
+                                onClick={() => history.push(entry.path)} 
+                                as='a' 
+                                active={location.pathname === entry.path}>
+                                    { entry.title }
+                                </Menu.Item>
+                            )
+                        })
+                    }
+
+                    <Menu.Menu position='right'>
+                        <Dropdown item text='Matheus Pedroni'>
+                            <Dropdown.Menu>
+                                <Dropdown.Header icon='home' content='Escola Teste' />
+                                {
+                                    Router.filter(r => r.dropdown).map((entry, key) => {
+                                        return (
+                                            <Dropdown.Item 
+                                            onClick={() => entry.onClick ? entry.onClick() : () => history.push(entry.path)} 
+                                            key={key}>
+                                                { entry.title }
+                                            </Dropdown.Item>
+                                        )
+                                    })
+                                }
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Menu.Menu>
+                </Container>
+            </Menu>
+
+            <Divider className="special-divider" />
+        </div>
     )
 }

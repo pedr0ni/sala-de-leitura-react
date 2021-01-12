@@ -21,7 +21,7 @@ export default function Dashboard() {
                 </Statistic.Group>
             </Segment>
 
-            <Grid columns="two" divided>
+            <Grid columns="two">
                 <Grid.Row>
                     <Grid.Column>
                         

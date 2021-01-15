@@ -1,7 +1,5 @@
 import React from 'react'
-import { Button, Card, Divider, Dropdown, Form, Grid, Header, Icon, Image, Input, Label, Menu, Segment, Table } from 'semantic-ui-react'
-
-import SchoolImage from '../assets/img/school.png'
+import { Button, Dropdown, Icon, Input, Menu, Table } from 'semantic-ui-react'
 
 export default function Students() {
     return (

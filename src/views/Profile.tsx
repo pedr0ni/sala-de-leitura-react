@@ -71,7 +71,7 @@ export default function Profile() {
             
             <div className="profile-row profile-100">
                 {
-                    tabs.filter(tab => currentTab === tab.id).map((entry ,key) => {
+                    tabs.filter(tab => currentTab === tab.id).map((entry, key) => {
                         return entry.component
                     })
                 }

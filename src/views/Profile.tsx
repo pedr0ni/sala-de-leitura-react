@@ -56,27 +56,23 @@ export default function Profile() {
                 </Card>
 
                 <Menu className="profile-menu" vertical>
-                    <Menu.Item onClick={() => setCurrentTab('my-school')} active={currentTab == 'my-school'}>
-                        <Icon name="home" />
-                        Minha Escola
-                    </Menu.Item>
-
-                    <Menu.Item onClick={() => setCurrentTab('users')} active={currentTab == 'users'}>
-                        <Icon name="users" />
-                        Usuários
-                    </Menu.Item>
-
-                    <Menu.Item onClick={() => setCurrentTab('membership')} active={currentTab == 'membership'}>
-                        <Icon name="payment" />
-                        Assinatura
-                    </Menu.Item>
+                    {
+                        tabs.map((entry, key) => {
+                            return (
+                                <Menu.Item onClick={() => setCurrentTab(entry.id)} active={currentTab === entry.id}>
+                                    <Icon name={entry.icon} />
+                                    { entry.title }
+                                </Menu.Item>
+                            )
+                        })
+                    }
                 </Menu>
             </div>
             
             <div className="profile-row profile-100">
                 {
-                    tabs.map((entry ,key) => {
-                        // TODO
+                    tabs.filter(tab => currentTab === tab.id).map((entry ,key) => {
+                        return entry.component
                     })
                 }
             </div>

@@ -3,11 +3,18 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { Container, Divider, Dropdown, Menu } from 'semantic-ui-react'
 
 import Logo from '../assets/img/logo.png'
-import Router from '../utils/Router'
+import Router, { RouterType } from '../utils/Router'
 
 export default function CustomMenu() {
     const location = useLocation()
     const history = useHistory()
+
+    const handleClick = (entry: RouterType) => {
+        if (entry.onClick) 
+            entry.onClick()
+        else
+            history.push(entry.path)
+    }
 
     return (
         <div>
@@ -39,7 +46,7 @@ export default function CustomMenu() {
                                     Router.filter(r => r.dropdown).map((entry, key) => {
                                         return (
                                             <Dropdown.Item 
-                                            onClick={() => entry.onClick ? entry.onClick() : () => history.push(entry.path)} 
+                                            onClick={() => handleClick(entry)} 
                                             key={key}>
                                                 { entry.title }
                                             </Dropdown.Item>

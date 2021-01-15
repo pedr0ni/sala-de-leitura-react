@@ -21,7 +21,8 @@ const Router: RouterType[] = [
     {
         title: 'Meu Perfil',
         path: '/profile',
-        dropdown: true
+        dropdown: true,
+        onClick: undefined
     },
     {
         title: 'Sair',

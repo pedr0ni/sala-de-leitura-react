@@ -1,18 +1,10 @@
 import React from 'react'
 import { Card, Icon, Image, Menu } from 'semantic-ui-react'
-import { SemanticICONS } from 'semantic-ui-react/dist/commonjs/generic'
-
+import { ProfileTabType } from '../models/ProfileInterface'
 import UserPlaceholder from '../assets/img/user-placeholder.png'
-import { MySchool, MyUsers, Membership } from '../components/ProfileTabs'
+import { MySchool, MyUsers, Membership, Invoices } from '../components/ProfileTabs'
 
-interface Tab {
-    id: string,
-    title: string,
-    icon: SemanticICONS,
-    component: JSX.Element
-}
-
-const tabs: Tab[] = [
+const tabs: ProfileTabType[] = [
     {
         id: 'my-school',
         title: 'Minha Escola',
@@ -30,6 +22,12 @@ const tabs: Tab[] = [
         title: 'Assinatura',
         icon: 'payment',
         component: <Membership />
+    },
+    {
+        id: 'invoices',
+        title: 'Faturas',
+        icon: 'dollar sign',
+        component: <Invoices />
     }
 ]
 

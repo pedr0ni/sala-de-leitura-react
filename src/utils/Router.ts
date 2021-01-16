@@ -1,8 +1,11 @@
+import AccountService from "../service/AccountService"
+import * as H from 'history'
+
 export interface RouterType {
     title: string,
     path: string,
     dropdown?: boolean,
-    onClick?: () => void
+    onClick?: (history: H.History) => void
 }
 
 const Router: RouterType[] = [
@@ -27,8 +30,10 @@ const Router: RouterType[] = [
     {
         title: 'Sair',
         path: '/logout',
-        onClick: () => {
+        onClick: (history) => {
             // Logs user out
+            history.push('/auth/login')
+            AccountService.logout()
         },
         dropdown: true
     }

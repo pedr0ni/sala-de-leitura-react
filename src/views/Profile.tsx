@@ -34,8 +34,6 @@ const tabs: ProfileTabType[] = [
 export default function Profile() {
     const [currentTab, setCurrentTab] = React.useState('my-school')
 
-    console.log(currentTab)
-
     return (
         <div className="profile-grid">
             <div className="profile-row">

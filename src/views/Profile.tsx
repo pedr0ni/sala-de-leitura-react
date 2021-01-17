@@ -55,7 +55,7 @@ export default function Profile() {
                     {
                         tabs.map((entry, key) => {
                             return (
-                                <Menu.Item onClick={() => setCurrentTab(entry.id)} active={currentTab === entry.id}>
+                                <Menu.Item key={key} onClick={() => setCurrentTab(entry.id)} active={currentTab === entry.id}>
                                     <Icon name={entry.icon} />
                                     { entry.title }
                                 </Menu.Item>
@@ -68,7 +68,11 @@ export default function Profile() {
             <div className="profile-row profile-100">
                 {
                     tabs.filter(tab => currentTab === tab.id).map((entry, key) => {
-                        return entry.component
+                        return (
+                            <div key={key}>
+                                { entry.component }
+                            </div>
+                        )
                     })
                 }
             </div>

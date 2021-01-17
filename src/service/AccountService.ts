@@ -25,6 +25,9 @@ class AccountService {
         return Service.post('/account-service/authenticate', body)
     }
 
+    myAccount() {
+        return Service.get('/account-service/my-account')
+    }
 
     setToken(token: string) {
         localStorage.setItem('Authorization', token)

@@ -4,7 +4,6 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	useLocation,
   } from "react-router-dom";
 import { Container } from 'semantic-ui-react';
 import CustomMenu from './components/CustomMenu';

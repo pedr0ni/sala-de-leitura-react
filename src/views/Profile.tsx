@@ -1,8 +1,13 @@
 import React from 'react'
-import { Card, Icon, Image, Menu } from 'semantic-ui-react'
+import { Card, Dimmer, Icon, Loader, Menu } from 'semantic-ui-react'
 import { ProfileTabType } from '../models/ProfileInterface'
-import UserPlaceholder from '../assets/img/user-placeholder.png'
-import { MySchool, MyUsers, Membership, Invoices } from '../components/ProfileTabs'
+import MySchool from '../components/profile/MySchool'
+import MyUsers from '../components/profile/MyUsers'
+import { Membership } from '../components/profile/Membership'
+import { Invoices } from '../components/profile/Invoices'
+import StorageManager from '../firebase/StorageManager'
+import Account from '../models/Account'
+import AccountService from '../service/AccountService'
 
 const tabs: ProfileTabType[] = [
     {
@@ -33,16 +38,56 @@ const tabs: ProfileTabType[] = [
 
 export default function Profile() {
     const [currentTab, setCurrentTab] = React.useState('my-school')
+    const [account, setAccount] = React.useState<Account>()
+    const [image, setImage] = React.useState('')
+    const [loadingImage, setLoadingImage] = React.useState(false)
+
+    const loadData = async () => {
+        const response = await AccountService.myAccount()
+
+        const image = await StorageManager.findImage(response.data.image!)
+
+        setImage(image)
+        setAccount(response.data)
+    }
+
+    const changeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setLoadingImage(true)
+
+        let formData = new FormData()
+        formData.append("image", e.target.files![0])
+
+        AccountService.changeImage(formData).then(async response => {
+            const image = await StorageManager.findImage(response.data.image!)
+            setImage(image)
+        }).catch(error => {
+            console.error(error)
+        }).then(() => setLoadingImage(false))
+    }
+
+    React.useEffect(() => {
+        loadData()
+    }, [])
 
     return (
         <div className="profile-grid">
             <div className="profile-row">
                 <Card className="profile-card">
-                    <Image src={UserPlaceholder} wrapped ui={false} />
+                    <div className="image profile-image-form">
+                        {
+                            loadingImage ? (
+                                <Dimmer active>
+                                    <Loader />
+                                </Dimmer>
+                            ) : <></>
+                        }
+                        <input accept=".png,.jpg,.jpeg" multiple={false} onChange={changeImage} type="file" />
+                        <img alt="Profile" src={image} />
+                    </div>
                     <Card.Content>
-                        <Card.Header>Matheus Pedroni</Card.Header>
+                        <Card.Header>{ account?.name }</Card.Header>
                         <Card.Meta>
-                            Escola Teste
+                            { account?.school?.name }
                         </Card.Meta>
                     </Card.Content>
                     <Card.Content extra>

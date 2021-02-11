@@ -1,9 +1,10 @@
+import { Invoice } from '../models/Invoice'
 import Service from './Service'
 
 class InvoiceService {
 
     byAccount() {
-        return Service.get('/invoice-service/by-account')
+        return Service.get<Invoice[]>('/invoice-service/by-account')
     }
 
 }

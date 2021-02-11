@@ -5,7 +5,7 @@ import AccountService from '../../service/AccountService'
 export interface IPrivateRouteProps extends RouteProps { }
 
 export const PrivateRoute: React.FC<IPrivateRouteProps> = (props) => {
-	const [logged, setLogged] = React.useState(AccountService.getToken())
+	const [logged] = React.useState(AccountService.getToken())
 
 	return logged ? (
 		<Route {...props} component={props.component} render={undefined} />

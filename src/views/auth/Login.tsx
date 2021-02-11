@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 import Logo from '../../assets/img/logo.png'
@@ -65,7 +65,7 @@ export default function Login() {
                 </Segment>
             </Form>
             <Message>
-                Não possui uma conta? <a href='#'>Registre-se</a>
+                Não possui uma conta? <Link to={{pathname: '/auth/register'}}>Registre-se</Link>
             </Message>
             </Grid.Column>
         </Grid>

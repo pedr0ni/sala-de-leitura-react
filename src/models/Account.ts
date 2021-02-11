@@ -1,3 +1,5 @@
+import School from "./School";
+
 export interface AccountMembership {
     paymentMethod?: "credit-card" | "bank-slip" | string,
     creditCard?: string,
@@ -14,5 +16,7 @@ export default interface Account {
     password?: string,
     lastLogin?: Date,
     membership?: AccountMembership,
+    image?: string,
+    school?: School,
     createdAt?: string
 }

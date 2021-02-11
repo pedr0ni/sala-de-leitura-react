@@ -26,7 +26,15 @@ class AccountService {
     }
 
     myAccount() {
-        return Service.get('/account-service/my-account')
+        return Service.get<Account>('/account-service/my-account')
+    }
+
+    changeImage(body: FormData) {
+        return Service.post<Account>('/account-service/change-image', body, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 
     setToken(token: string) {
@@ -44,6 +52,16 @@ class AccountService {
         const value = localStorage.getItem('Authorization')
         
         return value
+    }
+
+    setAccount(account: Account) {
+        localStorage.setItem('Static_Account', JSON.stringify(account))
+    }
+
+    getAccount() : Account | null {
+        const account = localStorage.getItem('Static_Account')
+
+        return account ? JSON.parse(account) : null
     }
 
 }

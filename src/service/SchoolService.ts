@@ -1,13 +1,19 @@
+import Account from '../models/Account'
+import School from '../models/School'
 import Service from './Service'
 
 class SchoolService {
 
-    byAccount() {
-        return Service.get('/school-service/by-account')
+    fetchByAccount() {
+        return Service.get<School>('/school-service/by-account')
+    }
+
+    updateByAccount(body: School) {
+        return Service.put<School>('/school-service/by-account', body)
     }
 
     allAccounts() {
-        return Service.get('/school-service/all-accounts')
+        return Service.get<Account[]>('/school-service/all-accounts')
     }
 
 }

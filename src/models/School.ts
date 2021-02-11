@@ -1,4 +1,4 @@
-export interface School {
+export default interface School {
     _id?: string,
     name?: string,
     location?: string,
